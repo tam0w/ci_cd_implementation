@@ -36,7 +36,7 @@ while True:
 
 ''' 
 Command to run:
-
+Testing author
 pyinstaller --noconfirm --onedir --console --name "ci_cd_test"  "D:/PROJECTS/ci_cd_implementation/demo_app.py" 
 
 '''
