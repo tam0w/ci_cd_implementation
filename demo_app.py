@@ -1,3 +1,3 @@
-name = input('What is your name?')
+name = input('What is your name? \n')
 
-print(f"Wow {name} really sucks.")
+print(f"\nWow {name} really sucks.")
