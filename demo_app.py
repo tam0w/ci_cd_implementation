@@ -1,7 +1,7 @@
 import time
 
 import requests
-v = 1.1
+v = 1.2
 def check_for_update(current_version):
     # Query GitHub API to get the latest release version
     url = "https://api.github.com/repos/tam0w/ci_cd_implementation/releases/latest"
@@ -36,6 +36,7 @@ while True:
 
 ''' 
 Command to run:
+
 pyinstaller --noconfirm --onedir --console --name "ci_cd_test"  "D:/PROJECTS/ci_cd_implementation/demo_app.py" 
 
 '''
