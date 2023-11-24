@@ -1,3 +1,5 @@
+import time
+
 import requests
 v = 1.1
 def check_for_update(current_version):
@@ -5,15 +7,17 @@ def check_for_update(current_version):
     url = "https://api.github.com/repos/tam0w/ci_cd_implementation/releases/latest"
     response = requests.get(url)
     latest_version = float(response.json()["tag_name"])
-    print(latest_version)
+    print("Update Checker:")
+    print("Latest Version:", latest_version)
+    print("Current Version:", current_version)
+    print("------------------------------------")
+    time.sleep(0.5)
 
-    # Compare versions and return True if an update is available
-    return latest_version > current_version
-
+check_for_update(v)
 
 while True:
 
-    check_for_update(v)
+
 
     name = input('What is your name? \n')
 
@@ -22,7 +26,8 @@ while True:
         exit()
 
     else:
-        print(f"\nWow {name} really sucks.\n")
+        print(f"Wow {name} really sucks.")
+        time.sleep(0.5)
 
 
 
