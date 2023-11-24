@@ -1,10 +1,11 @@
 import requests
-v = 1.0
+v = 1.1
 def check_for_update(current_version):
     # Query GitHub API to get the latest release version
-    url = "https://api.github.com/repos/your_username/your_repository/releases/latest"
+    url = "https://api.github.com/repos/tam0w/ci_cd_implementation/releases/latest"
     response = requests.get(url)
-    latest_version = response.json()["tag_name"]
+    latest_version = float(response.json()["tag_name"])
+    print(latest_version)
 
     # Compare versions and return True if an update is available
     return latest_version > current_version
