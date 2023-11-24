@@ -1,7 +1,7 @@
 import time
 
 import requests
-v = 1.2
+v = 1.3
 def check_for_update(current_version):
     # Query GitHub API to get the latest release version
     url = "https://api.github.com/repos/tam0w/ci_cd_implementation/releases/latest"
