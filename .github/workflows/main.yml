@@ -26,7 +26,7 @@ jobs:
       run: pyinstaller --noconfirm --onefile --console --name "ci_cd.exe"  "demo_app.py"
 
     - name: Create zip file
-      run: Compress-Archive -Path ./dist/ci_cd_test.exe -DestinationPath ./ci_cd_test.zip
+      run: Compress-Archive -Path ./dist/ci_cd.exe -DestinationPath ./ci_cd_test.zip
 
     - name: Attach zip to release
       uses: actions/github-script@v3
