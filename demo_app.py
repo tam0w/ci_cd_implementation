@@ -1,7 +1,11 @@
 import time
 import requests
 
-v = 1.5
+current_version = 1.5
+
+def run_updater():
+
+    print('Update in progress.')
 
 def check_for_update(current_version):
     # Query GitHub API to get the latest release version
@@ -14,7 +18,11 @@ def check_for_update(current_version):
     print("------------------------------------")
     time.sleep(0.5)
 
-check_for_update(v)
+    return latest_version > current_version
+
+if check_for_update(current_version):
+
+    run_updater()
 
 while True:
 

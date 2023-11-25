@@ -240,3 +240,12 @@ cython_debug/
 #.idea/
 
 /update.ico
+/output/ci_cd/_internal/base_library.zip
+/output/ci_cd/_internal/certifi/cacert.pem
+/output/ci_cd/ci_cd.exe
+/output/ci_cd/ci_cd.rar
+/output/ci_cd/_internal/libcrypto-1_1.dll
+/output/ci_cd/_internal/libssl-1_1.dll
+/output/ci_cd/_internal/certifi/py.typed
+/output/ci_cd/_internal/python311.dll
+/output/ci_cd/_internal/VCRUNTIME140.dll
