@@ -1,0 +1,49 @@
+name: Build and Release
+
+on:
+  release:
+    types: [created]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.11'
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+
+    - name: Build with PyInstaller
+      run: pyinstaller --noconfirm --onedir --console --name "ci_cd_test"  "demo_app.py"
+
+    - name: Create zip file
+      run: zip -r ci_cd_test.zip ./dist
+
+    - name: Attach zip to release
+      uses: actions/github-script@v3
+      with:
+        github-token: ${{secrets.GITHUB_TOKEN}}
+        script: |
+          const fs = require('fs');
+          const artifact = fs.readFileSync('ci_cd_test.zip');
+          const release_id = context.payload.release.id;
+          await github.repos.uploadReleaseAsset({
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            release_id: release_id,
+            name: "ci_cd_test.zip",
+            data: artifact,
+            headers: {
+              'content-type': 'application/octet-stream',
+              'content-length': artifact.length
+            }
+          });
