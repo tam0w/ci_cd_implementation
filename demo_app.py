@@ -1,7 +1,8 @@
 import time
-
 import requests
+
 v = 1.3
+
 def check_for_update(current_version):
     # Query GitHub API to get the latest release version
     url = "https://api.github.com/repos/tam0w/ci_cd_implementation/releases/latest"
@@ -17,10 +18,7 @@ check_for_update(v)
 
 while True:
 
-
-
     name = input('What is your name? \n')
-
 
     if name.lower() == 'exit':
         exit()
@@ -30,13 +28,11 @@ while True:
         time.sleep(0.5)
 
 
-
-
-
-
 ''' 
 Command to run:
 
 pyinstaller --noconfirm --onedir --console --name "ci_cd_test"  "D:/PROJECTS/ci_cd_implementation/demo_app.py" 
+
+pyinstaller --noconfirm --onedir --console --name "ci_cd_test"  "demo_app.py" 
 
 '''
