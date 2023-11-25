@@ -1,7 +1,7 @@
 import time
 import requests
 
-v = 1.3
+v = 1.5
 
 def check_for_update(current_version):
     # Query GitHub API to get the latest release version
@@ -33,6 +33,6 @@ Command to run:
 
 pyinstaller --noconfirm --onedir --console --name "ci_cd_test"  "D:/PROJECTS/ci_cd_implementation/demo_app.py" 
 
-pyinstaller --noconfirm --onedir --console --name "ci_cd_test"  "demo_app.py" 
+pyinstaller --noconfirm --onedir --console --name "ci_cd_test"  "/workspaces/ci_cd_implementation/demo_app.py" 
 
 '''
