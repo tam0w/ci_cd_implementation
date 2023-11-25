@@ -1,7 +1,7 @@
 import time
 import requests
 
-current_version = 1.5
+current_version = 2.1
 
 def run_updater():
 
