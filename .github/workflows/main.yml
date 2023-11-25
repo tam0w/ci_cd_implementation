@@ -23,7 +23,7 @@ jobs:
         pip install -r requirements.txt
 
     - name: Build with PyInstaller
-      run: pyinstaller --noconfirm --onefile --icon "update.ico" --console --name "ci_cd.exe"  "demo_app.py"
+      run: pyinstaller --noconfirm --onefile --console --name "ci_cd.exe"  "demo_app.py"
 
     - name: Create zip file
       run: Compress-Archive -Path ./dist/ci_cd_test.exe -DestinationPath ./ci_cd_test.zip
