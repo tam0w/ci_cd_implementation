@@ -6,7 +6,7 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
 
     steps:
     - name: Checkout code
@@ -25,9 +25,8 @@ jobs:
     - name: Build with PyInstaller
       run: pyinstaller --noconfirm --onefile --console --name "ci_cd_test"  "demo_app.py"
 
-
     - name: Create zip file
-      run: zip -r ci_cd_test.zip ./dist
+      run: Compress-Archive -Path ./dist/ci_cd_test.exe -DestinationPath ./ci_cd_test.zip
 
     - name: Attach zip to release
       uses: actions/github-script@v3
