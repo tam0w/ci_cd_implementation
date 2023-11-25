@@ -22,16 +22,13 @@ jobs:
         python -m pip install --upgrade pip
         pip install -r requirements.txt
 
-    - name: Install Python dev package
-      run: sudo apt-get install -y python3-dev
-
     - name: Build with PyInstaller
       run: pyinstaller --noconfirm --onedir --console --name "ci_cd_test"  "demo_app.py"
 
     - name: Create zip file
       run: |
         cd dist
-        zip -r ci_cd_test.zip ./ci_cd_test
+        zip -r ci_cd_test.zip
 
     - name: Attach zip to release
       uses: actions/github-script@v3
