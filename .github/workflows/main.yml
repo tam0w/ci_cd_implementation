@@ -23,9 +23,9 @@ jobs:
         pip install -r requirements.txt
 
     - name: Build with PyInstaller
-      run: pyinstaller --noconfirm --onedir --console --name "ci_cd_test"  "demo_app.py"
+      run: pyinstaller --noconfirm --onefile --console --name "ci_cd_test"  "demo_app.py"
 
-      
+
     - name: Create zip file
       run: zip -r ci_cd_test.zip ./dist
 
