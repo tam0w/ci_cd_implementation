@@ -1,7 +1,7 @@
 import time
 import requests
 
-current_version = 2.3
+current_version = 2.4
 
 def run_updater():
 
@@ -43,5 +43,5 @@ pyinstaller --noconfirm --onedir --console --name "ci_cd_test"  "D:/PROJECTS/ci_
 
 pyinstaller --noconfirm --onedir --console --name "ci_cd_test"  "/workspaces/ci_cd_implementation/demo_app.py" 
 
-pyinstaller --noconfirm --onefile --console --name "ci_cd.exe" --icon "./update.ico" "demo_app.py"
+pyinstaller --noconfirm --onefile --console --name "ci_cd.exe" --icon "update.ico" "demo_app.py"
 '''
