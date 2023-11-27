@@ -15,15 +15,16 @@ import zipfile
 
 import requests
 
-current_version = 2.6
+current_version = 3.0
 
 def check_for_update(this_version):
     # Query GitHub API to get the latest release version
     url = "https://api.github.com/repos/tam0w/ci_cd_implementation/releases/latest"
 
-    github_token = "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"
+    github_token = "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"
     headers = {'Authorization': f'token {github_token}'}
     response = requests.get(url, headers=headers)
+    print(response.json())
     latest_version = float(response.json()["tag_name"])
     print("Update Checker:")
     print("Latest Version:", latest_version)
@@ -52,14 +53,9 @@ def download_app(resp):
     if response.status_code == 200:
         with open(local_filename, "wb") as f:
             f.write(response.content)
-        print(f"Download successful. {local_filename} saved.")
+        print(f"Download successful.")
 
-        # # Unzip the downloaded file into the current working directory
-        # with zipfile.ZipFile(local_filename, 'r') as zip_ref:
-        #     zip_ref.extractall(os.getcwd())
-        #
-        # # Delete the ZIP file
-        # os.remove(local_filename)
+
 def run_script():
 
     script_path = os.path.join(os.path.dirname(__file__), "ci_cd.exe")
@@ -67,13 +63,13 @@ def run_script():
         subprocess.run([script_path])
     else:
         try:
-
             download_app(resp)
-            return True
+            subprocess.run([script_path])
         except Exception as e:
             traceback.print_exc()
             print(f"Error downloading the file: {e}")
             return False
+
 
 update, resp = check_for_update(current_version)
 
