@@ -23,27 +23,13 @@ jobs:
         pip install -r requirements.txt
 
     - name: Build with PyInstaller
-      run: pyinstaller --noconfirm --onefile --console --name "ci_cd.exe" "demo_app.py"
+      run: pyinstaller --noconfirm --onefile --console --name "ci_cd.exe" "ci_cd.py"
 
-    - name: Create zip file
-      run: Compress-Archive -Path ./dist/ci_cd.exe -DestinationPath ./ci_cd_test.zip
-
-    - name: Attach zip to release
-      uses: actions/github-script@v3
+    - name: Attach executable to release
+      uses: actions/upload-artifact@v2
       with:
-        github-token: ${{secrets.GITHUB_TOKEN}}
-        script: |
-          const fs = require('fs');
-          const artifact = fs.readFileSync('ci_cd_test.zip');
-          const release_id = context.payload.release.id;
-          await github.repos.uploadReleaseAsset({
-            owner: context.repo.owner,
-            repo: context.repo.repo,
-            release_id: release_id,
-            name: "ci_cd_test.zip",
-            data: artifact,
-            headers: {
-              'content-type': 'application/octet-stream',
-              'content-length': artifact.length
-            }
-          });
+        name: ci_cd_exe
+        path: ./dist/ci_cd.exe
+
+    - name: Display artifact path
+      run: echo "The executable is available at ${{github.event.release.assets[0].browser_download_url}}"
