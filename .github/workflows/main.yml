@@ -38,6 +38,6 @@ jobs:
       run: |
         curl -sSL \
           -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
-          -H "Content-Type: application/zip" \
-          --data-binary "@./dist/ci_cd.exe" \
-          "https://uploads.github.com/repos/${{ github.repository }}/releases/${{ github.event.release.id }}/assets?name=ci_cd.exe"
+          -H "Content-Type: application/json" \
+          --data '{"name": "ci_cd.exe", "label": "Executable", "file": "./dist/ci_cd.exe"}' \
+          "https://api.github.com/repos/${{ github.repository }}/releases/${{ github.event.release.id }}/assets"
