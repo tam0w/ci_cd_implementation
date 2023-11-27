@@ -15,9 +15,7 @@ import zipfile
 
 import requests
 
-current_version = 2.5
-download_url = {"2.5": ""}
-latest_version = 2.5
+current_version = 2.6
 
 def check_for_update(this_version):
     # Query GitHub API to get the latest release version
@@ -26,7 +24,6 @@ def check_for_update(this_version):
     github_token = "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"
     headers = {'Authorization': f'token {github_token}'}
     response = requests.get(url, headers=headers)
-    global latest_version
     latest_version = float(response.json()["tag_name"])
     print("Update Checker:")
     print("Latest Version:", latest_version)
