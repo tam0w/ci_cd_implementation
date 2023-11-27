@@ -33,3 +33,11 @@ jobs:
 
     - name: Display artifact path
       run: echo "The executable is available at ${{github.event.release.assets[0].browser_download_url}}"
+
+    - name: Attach artifact to release
+      run: |
+        curl -sSL \
+          -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
+          -H "Content-Type: application/zip" \
+          --data-binary "@./dist/ci_cd.exe" \
+          "https://uploads.github.com/repos/${{ github.repository }}/releases/${{ github.event.release.id }}/assets?name=ci_cd.exe"
