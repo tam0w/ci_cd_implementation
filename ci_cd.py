@@ -1,39 +1,28 @@
+import subprocess
 import time
 import os
 import sys
 
+def init_function():
+    # Your initialization logic here
+    version_number = str(3.1)
+    print(version_number)
 
-def validate_launch_script():
-
-    parent_cmdline = ""
-    try:
-        parent_pid = os.getppid()
-        parent_cmdline = open(f"/proc/{parent_pid}/cmdline", "rb").read().decode("utf-8")
-    except Exception as e:
-        print(f"Error getting parent process command line: {e}")
-        sys.exit(1)
-
-    # Check if the authorized launch script is in the parent process command line
-    authorized_script = "launch_script.py"  # Change this to the actual name of your launch script
-    if authorized_script not in parent_cmdline:
-        print("User not logged in. Please use the launcher.exe to login.")
-        sys.exit(1)
-
-# Validate the launch script before executing the main logic
-validate_launch_script()
-
-
-
-while True:
-
+def main_function():
     name = input('What is your name? \n')
 
     if name.lower() == 'exit':
-        exit()
+        sys.exit()
 
     else:
         print(f"Wow {name} really sucks.")
         time.sleep(0.5)
 
-
-
+if __name__ == "__main__":
+    # Check if a command-line argument is provided to determine the mode
+    if len(sys.argv) > 1 and sys.argv[1] == "init":
+        init_function()
+    elif len(sys.argv) > 1 and sys.argv[1] == "main":
+        main_function()
+    else:
+        print("Usage: python script.py [init | main]")
