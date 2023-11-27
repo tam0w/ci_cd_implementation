@@ -34,10 +34,29 @@ jobs:
     - name: Display artifact path
       run: echo "The executable is available at ${{github.event.release.assets[0].browser_download_url}}"
 
-    - name: Attach artifact to release
-      run: |
-        curl -sSL \
-          -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
-          -H "Content-Type: application/json" \
-          --data '{"name": "ci_cd.exe", "label": "Executable", "file": "./dist/ci_cd.exe"}' \
-          "https://api.github.com/repos/${{ github.repository }}/releases/${{ github.event.release.id }}/assets"
+    - name: Attach executable to release
+      uses: actions/github-script@v3
+      with:
+        github-token: ${{secrets.GITHUB_TOKEN}}
+        script: |
+          const fs = require('fs');
+          const filePath = 'dist/ci_cd.exe';  // Adjust the path if necessary
+          const releaseId = context.payload.release.id;
+    
+          const stats = fs.statSync(filePath);
+          const fileData = fs.readFileSync(filePath);
+    
+          await github.repos.uploadReleaseAsset({
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            release_id: releaseId,
+            name: 'ci_cd.exe',
+            data: fileData,
+            headers: {
+              'content-type': 'application/octet-stream',
+              'content-length': stats.size
+            }
+          });
+    
+          console.log('Upload successful.');
+
