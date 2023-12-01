@@ -5,18 +5,19 @@ import sys
 
 def init_function():
     # Your initialization logic here
-    version_number = str(3.1)
+    version_number = str(3.5)
     print(version_number)
 
 def main_function():
-    name = input('What is your name? \n')
+    while True:
+        name = input('What is your name? \n')
 
-    if name.lower() == 'exit':
-        sys.exit()
+        if name.lower() == 'exit':
+            sys.exit()
 
-    else:
-        print(f"Wow {name} really sucks.")
-        time.sleep(0.5)
+        else:
+            print(f"Wow {name} really sucks.")
+            time.sleep(0.5)
 
 if __name__ == "__main__":
     # Check if a command-line argument is provided to determine the mode

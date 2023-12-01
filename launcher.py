@@ -18,7 +18,6 @@ import requests
 script_path = os.path.join(os.path.dirname(__file__), "ci_cd.exe")
 
 
-
 def check_for_update(this_version):
     # Query GitHub API to get the latest release version
     url = "https://api.github.com/repos/tam0w/ci_cd_implementation/releases/latest"
@@ -53,6 +52,7 @@ def run_updater(resp):
         print(f"Download successful.")
     subprocess.run([script_path, 'main'])
 
+
 def download_app(resp):
     print("Downloading app...")
     assets = resp["assets"][0]
@@ -68,28 +68,14 @@ def download_app(resp):
         print(f"Download successful.")
 
 
-def run_script():
+if not os.path.exists(script_path):
+    download_app(requests.get("https://api.github.com/repos/tam0w/ci_cd_implementation/releases/latest").json())
 
-    if os.path.exists(script_path):
-        subprocess.run([script_path, 'main'])
-    else:
-        try:
-            download_app(resp)
-            subprocess.run([script_path, 'main'])
-        except Exception as e:
-            traceback.print_exc()
-            print(f"Error downloading the file: {e}")
-            return False
-
-result = subprocess.run([script_path, 'init'], capture_output=True, text=True)
-version_number = float(result.stdout.strip())
-print(version_number)
-
+version_number = float(subprocess.check_output([script_path, 'init'], text=True))
 
 update, resp = check_for_update(version_number)
 
-
 if update:
-        run_updater(resp)
+    run_updater(resp)
 else:
-        run_script()
+    subprocess.run([script_path, 'main'])
